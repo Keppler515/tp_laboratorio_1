@@ -19,4 +19,5 @@ int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, 
 int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos);
 int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos);
 void imprimirArray(int contenidoArray[],int longitudArray);
+int borrarImparesArray(int arrayDeEnteros[], int tamanoArray);
 #endif /* UTN_BIBLIOTECA_H_ */

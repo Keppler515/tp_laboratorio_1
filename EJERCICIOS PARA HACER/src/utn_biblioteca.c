@@ -171,3 +171,24 @@ void imprimirArray(int contenidoArray[],int longitudArray)
 
 }
 
+
+int borrarImparesArray(int arrayDeEnteros[], int tamanoArray)
+{
+	int retorno = -1;
+	int i;
+	if(arrayDeEnteros != NULL && tamanoArray >=0)
+	{
+		for(i=0; i<tamanoArray; i++)
+		{
+			if(arrayDeEnteros[i]%2 != 0)
+			{
+				arrayDeEnteros[i] = 0;
+			}
+		}
+
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
