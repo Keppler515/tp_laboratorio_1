@@ -96,9 +96,9 @@ int main(void) {
 				{
 					for(i=0; i<DIAS; i++)
 					{
-						if(temperaturaDiaria[dia]!=0)
+						if(temperaturaDiaria[i]!=0)
 						{
-							printf("Dia %d: Temperatura: %.2f°\n",i+1,temperaturaDiaria[i+1]);
+							printf("Dia %d: Temperatura: %.2f°\n",i+1,temperaturaDiaria[i+1]); //PROBLEMAS CON LA IMPRESION. DEL ORDEN DE CUÁNDO INGRESO VALORES PARA EL DIA 1 o 31 DEPENDE QUE SE VEAN O NO
 						}
 					}
 				}
