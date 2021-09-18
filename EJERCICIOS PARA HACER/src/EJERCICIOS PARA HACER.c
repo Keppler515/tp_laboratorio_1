@@ -17,15 +17,6 @@
  * Ambas opciones deben volver al menu ppal.
  * Utilizar la funcion utn_getNumeroFloat() de la biblioteca utn.h
  *
- *
- * * Ejercicio 2:
- a) Realizar un programa que le pida 5 numeros int al usuario y los almacene en un array.
- Luego ejecutar la funcion borrarImpares() pasandole el array y que deberá reemplazar
- los numeros que son impares por un cero.
- b) Luego imprimir el array para chequear el funcionamiento.
- c) Ordenar el array y volver a imprimirlo ordenado.
- *
- *
  */
 
 
@@ -38,7 +29,6 @@
 #define DIAS 31
 #define EJ2 5
 
-int borrarImparesArray(int arrayDeEnteros[], int tamanoArray);
 
 int main(void) {
 
@@ -50,108 +40,73 @@ int main(void) {
 	int opcion;
 	int i;
 	int respuesta;
-	int arrayEjercicio2[EJ2];
-	int j;
-	int numero;
 
-	//2
-
-	for(j=0; j<EJ2; j++)
-	{
-		respuesta = utn_getNumero(&numero, "\nIngrese numero (1 a 100): ", "\nNumero fuera de rango.\n", 1, 100, 3);
-
-		if(respuesta == 0)
-		{
-			printf("\nEl numero ingresado es: %d\n", numero);
-			arrayEjercicio2[j]=numero;
-		}
-		else
-		{
-			printf("\nError\n");
-		}
-	}
-
-	printf("El array original es:\n");
-
-	for(j=0; j<EJ2; j++)
-	{
-		printf("%d\n",arrayEjercicio2[j]);
-	}
-
-
-	if(borrarImparesArray(arrayEjercicio2, EJ2)==0)
-	{
-		printf("\nEl array modificado es:\n");
-
-		for(j=0; j<EJ2; j++)
-		{
-			printf("%d\n",arrayEjercicio2[j]);
-		}
-	}
 
 
 
 
 	//1--------------------------------------
-
-	for(i=0; i<=DIAS; i++){temperaturaDiaria[i]=0;} //INICIALIZO ARRAY EN 0 PARA QUE NO HAYA BASURA
-
-
-	do
+	while(1==1)
 	{
-		printf("\n1-Imprimir array\n");
-		printf("2-Cargar array\n");
-		scanf("%d", &opcion);
 
+		for(i=0; i<=DIAS; i++){temperaturaDiaria[i]=0;} //INICIALIZO ARRAY EN 0 PARA QUE NO HAYA BASURA
 
-		if(opcion == 2)
+		//INICIA EL PROGRAMA
+		do
 		{
-			//PIDE EL DIA
-			respuesta = utn_getNumero(&dia, "\nIngrese dia (1 a 31): ", "\nFechafuera de rango.\n", 1, 31, 3);
-			if(respuesta == 0)
+			printf("\n1-Imprimir array\n");
+			printf("2-Cargar array\n");
+			scanf("%d", &opcion);
+
+
+			if(opcion == 2)
 			{
-				printf("\nLa fecha es: %d\n", dia);
+		//PIDE EL DIA
+				respuesta = utn_getNumero(&dia, "\nIngrese dia (1 a 31): ", "\nFechafuera de rango.\n", 1, 31, 3);
+				if(respuesta == 0)
+				{
+					printf("\nLa fecha es: %d\n", dia);
+				}
+				else
+				{
+					printf("\nError\n");
+				}
+
+		//PIDE LA TEMPERATURA
+				respuesta = utn_getNumeroFlotante(&temperatura, "\nIngrese temperatura (0 a 100): ", "\nTemperatura fuera de rango.\n", 0.00, 100.00, 3);
+				if(respuesta == 0)
+				{
+					printf("\nLa temperatura ingresada es: %.2f°\n\n", temperatura);
+				}
+				else
+				{
+					printf("\nError\n");
+				}
+
+				for(i=0; i<=DIAS; i++) //RECORRE EL ARRAY COMPLETO Y EN CADA POSICION DADA POR dia LE AGREGA EL VALOR DE temperatura
+					{
+						temperaturaDiaria[dia]=temperatura;
+
+					}
+
 			}
 			else
 			{
-				printf("\nError\n");
-			}
-
-			//PIDE LA TEMPERATURA
-			respuesta = utn_getNumeroFlotante(&temperatura, "\nIngrese temperatura (0 a 100): ", "\nTemperatura fuera de rango.\n", 0.00, 100.00, 3);
-			if(respuesta == 0)
-			{
-				printf("\nLa temperatura ingresada es: %.2f°\n\n", temperatura);
-			}
-			else
-			{
-				printf("\nError\n");
-			}
-
-			for(i=0; i<DIAS; i++) //RECORRE EL ARRAY COMPLETO Y EN CADA POSICION DADA POR dia LE AGREGA EL VALOR DE temperatura
+				if(opcion==1)
 				{
-					temperaturaDiaria[dia]=temperatura;
-
-				}
-
-			//contador++;
-
-		}
-		else
-		{
-			for(i=0; i<=DIAS; i++)
-			{
-				if(temperaturaDiaria[i]!=0.00)
-				{
-					printf("Dia %d: Temperatura: %.2f°\n",i+1,temperaturaDiaria[i]);
+					for(i=0; i<DIAS; i++)
+					{
+						if(temperaturaDiaria[i]!=0)
+						{
+							printf("Dia %d: Temperatura: %.2f°\n",i+1,temperaturaDiaria[i+1]); //PROBLEMAS CON LA IMPRESION. DEL ORDEN DE CUÁNDO INGRESO VALORES PARA EL DIA 1 o 31 DEPENDE QUE SE VEAN O NO
+						}
+					}
 				}
 			}
-		}
 
-	}while(opcion !=1);
+		}while(opcion !=1);
 
-
-
+	}
 
 
 
@@ -159,24 +114,5 @@ int main(void) {
 }
 
 
-int borrarImparesArray(int arrayDeEnteros[], int tamanoArray)
-{
-	int retorno = -1;
-	int i;
-	if(arrayDeEnteros != NULL && tamanoArray >=0)
-	{
-		for(i=0; i<tamanoArray; i++)
-		{
-			if(arrayDeEnteros[i]%2 != 0)
-			{
-				arrayDeEnteros[i] = 0;
-			}
-		}
-
-		retorno = 0;
-	}
-
-	return retorno;
-}
 
 
