@@ -49,6 +49,19 @@ int division(int a, int b, float* pDir)
 	return estado;
 }
 
+int factorial(int a)
+{
+	int i;
+	int aux = a;
+
+	for(i=1; i<a; i++)
+	{
+		aux = aux*i;
+	}
+
+	return aux;
+}
+
 int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
 
