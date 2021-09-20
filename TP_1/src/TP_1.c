@@ -46,20 +46,30 @@ int main(void) {
 	int operandoA;
 	int operandoB;
 	int opcion;
+	int resultadoS;
+	int resultadoR;
+	int resultadoM;
+	float resultadoD;
 	float resultado;
+	int resultadoFA;
+	int resultadoFB;
+
+	operandoA=0;
+	operandoB=0;
 
 	do
 	{
 		puts("1- Ingresar 1er operando (A=x): ");
 		puts("2- Ingresar 2do operando (B=x): ");
 		puts("3- Calcular todas las operaciones: ");
+		puts("4- Mostrar resultados:");
 		scanf("%d", &opcion);
-
+		printf("\n");
 
 
 			if(opcion==1)
 			{
-				utn_getNumero(&operandoA, "Numero de 1 a 100: ", "\nNumero fuera de rango\n", 1, 100, 3);
+				utn_getNumero(&operandoA, "Ingrese un número de 1 a 100: ", "\nNumero fuera de rango\n", -100, 100, 3);
 				printf("Operando A = %d\n",operandoA);
 				printf("\n");
 			}
@@ -67,52 +77,61 @@ int main(void) {
 			{
 				if(opcion==2)
 				{
-					utn_getNumero(&operandoB, "Numero de 1 a 100: ", "Numero fuera de rango", 1, 100, 3);
+					utn_getNumero(&operandoB, "Ingrese un número de 1 a 100: ", "Número fuera de rango", -100, 100, 3);
 					printf("Operando B = %d\n",operandoB);
 					printf("\n");
 				}
 			}
 
+			if(opcion==3)
+			{
+				resultadoS = suma(operandoA,operandoB);
+				resultadoR = resta(operandoA,operandoB);
+				resultadoM = multiplicacion(operandoA,operandoB);
+				resultadoD = division(operandoA, operandoB, &resultado);
+				resultadoFA = factorial(operandoA);
+				resultadoFB = factorial(operandoB);
 
-	}while(opcion!=3);
+				puts("Operaciones calculadas");
+				printf("\n");
+			}
+
+			if(opcion==4)
+				{
+					if(operandoA!=0 || operandoB!=0)
+					{
+						printf("El resultado de la suma es: %d",resultadoS);
+						printf("\n");
+						printf("El resultado de la resta es: %d",resultadoR);
+						printf("\n");
+						printf("El resultado de la multiplicación es: %d",resultadoM);
+						printf("\n");
+						if(resultadoD==0)
+						{
+							printf("El resultado de la división es: %.2f",resultado);
+							printf("\n");
+						}
+						else
+						{
+							printf("No se puede dividir por cero");
+							printf("\n");
+						}
+						printf("El factorial de %d es: %d",operandoA,resultadoFA);
+						printf("\n");
+						printf("El factorial de %d es: %d",operandoB,resultadoFB);
+						printf("\n");
+					}
+					else
+					{
+						puts("No hay operandos ingresados.");
+						printf("\n");
+					}
+				}
 
 
-	//SUMA
+	}while(opcion!=4);
 
-		printf("\nEl resultado de la suma es: %d",suma(operandoA,operandoB));
-		printf("\n");
-
-	//RESTA
-
-		printf("\nEl resultado de la resta es: %d",resta(operandoA,operandoB));
-		printf("\n");
-
-	//MULTIPLICACION
-
-		printf("\nEl resultado de la multiplicación es: %d",multiplicacion(operandoA,operandoB));
-		printf("\n");
-
-	//DIVISION
-
-		if(division(operandoA, operandoB, &resultado)==0)
-		{
-			printf("\nEl resultado de la división es: %.2f", resultado);
-			printf("\n");
-		}
-		else
-		{
-			printf("No se puede dividir por cero");
-			printf("\n");
-		}
-
-
-	//FACTORIAL
-
-		printf("\nEl factorial de A es: %d",factorial(operandoA));
-		printf("\n");
-		printf("\nEl factorial de B es: %d",factorial(operandoB));
-		printf("\n");
-
+	printf("\n");
 
 	return EXIT_SUCCESS;
 }

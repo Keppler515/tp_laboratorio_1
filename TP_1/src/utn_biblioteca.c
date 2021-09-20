@@ -37,7 +37,7 @@ int division(int a, int b, float* pDir)
 	if(b!=0)
 	{
 		estado = 0;
-		total = (float) a/b;
+		total =(float) a/b;
 	}
 	else
 	{
@@ -49,16 +49,15 @@ int division(int a, int b, float* pDir)
 	return estado;
 }
 
-int factorial(int a)
+int factorial(int numero)
 {
 	int i;
-	int aux = a;
+	int aux=numero;
 
-	for(i=1; i<a; i++)
+	for(i=1; i<numero; i++)
 	{
-		aux = aux*i;
+		aux=aux*i;
 	}
-
 	return aux;
 }
 
@@ -70,24 +69,31 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo
 
 	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo<=maximo && reintentos>=0)
 	{
-		do
+
+		while(reintentos>=0)
 		{
-			printf("%s",mensaje);
-			scanf("%d",&bufferInt);
-
-			if(bufferInt>=minimo && bufferInt<=maximo)
+			puts(mensaje);
+			fflush(stdin);
+			if(scanf("%d",&bufferInt)==1)
 			{
-				*pResultado = bufferInt;
-				retorno = 0;
-				break;
-
+				if(bufferInt>=minimo && bufferInt<=maximo)
+				{
+					retorno = 0;
+					break;
+				}
+				else
+				{
+					puts(mensajeError);
+					reintentos--;
+				}
 			}
 			else
 			{
-				printf("%s",mensajeError);
-				reintentos--;
+				puts(mensajeError);
 			}
-		} while(reintentos>=0);
+		}
+
+		*pResultado = bufferInt;
 	}
 
 	return retorno;
@@ -127,3 +133,75 @@ int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char mi
 
 }
 
+int esNumerica(char cadena[])
+{
+	int retorno = -1;
+	int i = 0;
+	if(cadena!=NULL)
+	{
+		while(cadena[i]!='\0')
+			{
+				if(cadena[i]<'0' || cadena[i]>'9')
+				{
+					puts("Error");
+				}
+				else
+				{
+					retorno=0;
+				}
+
+				i++;
+			}
+	}
+
+	return retorno;
+}
+
+
+int esTexto(char cadena[])
+{
+	int retorno = -1;
+	int i = 0;
+	if(cadena!=NULL)
+	{
+		while(cadena[i]!='\0')
+			{
+				if((cadena[i]>= 'A' && cadena[i]<= 'Z') || (cadena[i]>= 'a'  && cadena[i]<= 'z' ))
+				{
+					retorno=0;
+				}
+				else
+				{
+					retorno=2;
+				}
+
+				i++;
+			}
+	}
+
+	return retorno;
+}
+
+
+int esAlfanumerica(char cadena[])
+{
+	{
+		int retorno = -1;
+		int i = 0;
+		if(cadena!=NULL)
+		{
+			while(cadena[i]!='\0')
+				{
+					if(esTexto(cadena)==0 && esNumerica(cadena)==0)
+					{
+						retorno=0;
+					}
+
+					i++;
+				}
+		}
+
+		return retorno;
+	}
+
+}

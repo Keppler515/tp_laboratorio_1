@@ -41,21 +41,14 @@ formatNombre(cadenaNombre,cadenaApellido);
 que imprima: "*-Perez,Juan-*"
 
 
-
-
-
-
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "utn_biblioteca.h"
 
 int mySrtLen(char cadena[], int* contadorMayusculas);
-int esNumerica(char cadena[]);
-int esTexto(char cadena[]);
-int esAlfanumerica(char cadena[]);
 int esEmail(char cadena[]);
 
 int main(void) {
@@ -64,19 +57,13 @@ int main(void) {
 
 
 	char cadenaDeCaracteres[33]="Buenas Tardes. Esto FUNCIONA";
-	char cadenaCopia[18]="ada2";
+	char cadenaCopia[18]="s4@";
 
 	int mayusculas = 0;
 	int caracteres;
 
-	//printf("%s\n",cadenaDeCaracteres);
-	//printf("%s\n",cadenaCopia);
-
 	//strncpy(cadenaCopia, cadenaDeCaracteres, sizeof(cadenaCopia));
 	//cadenaCopia[sizeof(cadenaCopia)-1]="\0";
-
-	//printf("%s\n",cadenaDeCaracteres);
-	//printf("%s\n",cadenaCopia);
 
 	//printf(strlen(cadenaCopia));
 
@@ -92,9 +79,15 @@ int main(void) {
 	}
 	else
 	{
-		puts("No es numerica");
+		if(esNumerica(cadenaCopia)==2)
+		{
+			puts("Algun caracter no es numerico");
+		}
+		else
+		{
+			puts("No es numerica");
+		}
 	}
-
 //----------------------------------------------
 
 	if(esTexto(cadenaCopia)==0)
@@ -103,19 +96,32 @@ int main(void) {
 	}
 	else
 	{
-		puts("No es de texto");
+		if(esTexto(cadenaCopia)==2)
+		{
+			puts("Algun caracter no es de texto");
+		}
+		else
+		{
+			puts("No es de texto");
+		}
 	}
-
 //-----------------------------------------------
 
-	if(esAlfanumerica(cadenaCopia)==0)
+	if(esAlfanumerica(cadenaCopia)==0) //CÓMO VALIDAR QUE HAYA TEXTO Y NUMEROS?
 	{
 		puts("Es alfanumérica");
 	}
 	else
 	{
-		puts("No es alfanumérica");
-	}
+		if(esAlfanumerica(cadenaCopia)==2)
+		{
+			puts("Algun caracter no es alfanumérico");
+		}
+		else
+		{
+			puts("No es alfanumérica");
+		}
+}
 
 //------------------------------------------------
 
@@ -164,70 +170,6 @@ void myStrCpy(cadena2, cadena1)
 }
 */
 
-int esNumerica(char cadena[])
-{
-	int retorno = -1;
-	int i = 0;
-	if(cadena!=NULL)
-	{
-		while(cadena[i]!='\0')
-			{
-				if(cadena[i]>='0' && cadena[i]<='9')
-				{
-					retorno=0;
-				}
-
-				i++;
-			}
-	}
-
-	return retorno;
-}
-
-
-int esTexto(char cadena[])
-{
-	int retorno = -1;
-	int i = 0;
-	if(cadena!=NULL)
-	{
-		while(cadena[i]!='\0')
-			{
-				if((cadena[i]>= 'A' && cadena[i]<= 'Z') || (cadena[i]>= 'a'  && cadena[i]<= 'z' ))
-				{
-					retorno=0;
-				}
-
-				i++;
-			}
-	}
-
-	return retorno;
-}
-
-
-int esAlfanumerica(char cadena[])
-{
-	{
-		int retorno = -1;
-		int i = 0;
-		if(cadena!=NULL)
-		{
-			while(cadena[i]!='\0')
-				{
-					if(esTexto(cadena)==0 && esNumerica(cadena)==0)
-					{
-						retorno=0;
-					}
-
-					i++;
-				}
-		}
-
-		return retorno;
-	}
-
-}
 
 
 int esEmail(char cadena[])

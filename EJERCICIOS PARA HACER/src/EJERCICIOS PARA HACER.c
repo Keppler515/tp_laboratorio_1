@@ -34,7 +34,7 @@ int main(void) {
 
 	setbuf(stdout,NULL);
 
-	float temperaturaDiaria[DIAS];
+	float temperaturaDiaria[DIAS]={0};
 	int dia;
 	float temperatura;
 	int opcion;
@@ -48,8 +48,6 @@ int main(void) {
 	//1--------------------------------------
 	while(1==1)
 	{
-
-		for(i=0; i<=DIAS; i++){temperaturaDiaria[i]=0;} //INICIALIZO ARRAY EN 0 PARA QUE NO HAYA BASURA
 
 		//INICIA EL PROGRAMA
 		do
@@ -83,10 +81,11 @@ int main(void) {
 					printf("\nError\n");
 				}
 
-				for(i=0; i<=DIAS; i++) //RECORRE EL ARRAY COMPLETO Y EN CADA POSICION DADA POR dia LE AGREGA EL VALOR DE temperatura
+				for(i=0; i<DIAS; i++) //RECORRE EL ARRAY COMPLETO Y EN CADA POSICION DADA POR dia LE AGREGA EL VALOR DE temperatura
 					{
 						temperaturaDiaria[dia]=temperatura;
 
+						printf("Dia %d: Temperatura: %.2f°\n",i+1,temperaturaDiaria[i+1]); //IMPRIMIENDO EL ARRAY EN CADA ITERACION SE PUEDE VER COMO DESAPARECEN LOS INDICES 1 Y 31
 					}
 
 			}
@@ -99,6 +98,7 @@ int main(void) {
 						if(temperaturaDiaria[i]!=0)
 						{
 							printf("Dia %d: Temperatura: %.2f°\n",i+1,temperaturaDiaria[i+1]); //PROBLEMAS CON LA IMPRESION. DEL ORDEN DE CUÁNDO INGRESO VALORES PARA EL DIA 1 o 31 DEPENDE QUE SE VEAN O NO
+							printf("\n");
 						}
 					}
 				}

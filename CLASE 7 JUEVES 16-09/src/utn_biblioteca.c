@@ -131,7 +131,8 @@ int esNumerica(char cadena[])
 			{
 				if(cadena[i]<'0' || cadena[i]>'9')
 				{
-					puts("Error");
+					retorno=2; //Si algun caracter no es numerico, retorno vale 2
+					break;
 				}
 				else
 				{
@@ -154,13 +155,17 @@ int esTexto(char cadena[])
 	{
 		while(cadena[i]!='\0')
 			{
-				if((cadena[i]>= 'A' && cadena[i]<= 'Z') || (cadena[i]>= 'a'  && cadena[i]<= 'z' ))
+				if(cadena[i]<'A' || cadena[i]>'Z')
 				{
-					retorno=0;
-				}
-				else
-				{
-					retorno=2;
+					if(cadena[i]<'a' || cadena[i]>'z')
+					{
+						retorno = 2;
+						break;
+					}
+					else
+					{
+						retorno = 0;
+					}
 				}
 
 				i++;
@@ -174,17 +179,31 @@ int esTexto(char cadena[])
 int esAlfanumerica(char cadena[])
 {
 	{
+		int aux1 = -1;
+		int aux2 = -1;
 		int retorno = -1;
 		int i = 0;
 		if(cadena!=NULL)
 		{
 			while(cadena[i]!='\0')
 				{
-					if(esTexto(cadena)==0 && esNumerica(cadena)==0)
+					if(cadena[i]>='0' && cadena[i]<='9')
 					{
-						retorno=0;
+						aux1 = 0;
 					}
-
+					if(cadena[i]>='A' && cadena[i]<='Z' || cadena[i]>='a' && cadena[i]<='z')
+					{
+						aux2 = 0;
+					}
+					if(cadena[i]<'0' || (cadena[i]>'9' && cadena[i]<'A') || (cadena[i]>'Z' && cadena[i]<'a') || cadena[i]>'z')
+					{
+						retorno = 2;
+						break;
+					}
+					if(aux1==0 && aux2==0)
+					{
+						retorno = 0;
+					}
 					i++;
 				}
 		}
@@ -193,3 +212,4 @@ int esAlfanumerica(char cadena[])
 	}
 
 }
+
