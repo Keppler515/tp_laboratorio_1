@@ -38,103 +38,97 @@ que contenga las funciones para realizar las cinco operaciones.
 #include "utn_biblioteca.h"
 
 
-int main(void) {
+int main(void)
+{
 
 	setbuf(stdout,NULL);
 
 
-	int operandoA;
+	int operandoA; //¿CÓMO HACER QUE NO SE PUEDAN REALIZAR LOS CALCULOS CON LA BASURA QUE ESTÁ EN LAS VARIABLES SIN TENER QUE INICIALIZAR EN CERO?
 	int operandoB;
 	int opcion;
 	int resultadoS;
 	int resultadoR;
 	int resultadoM;
-	float resultadoD;
-	float resultado;
+	float resultadoD; //GUARDA EL ESTADO DE LA DIVISION
+	float resultado; //GUARDA EL RESULTADO DE LA DIVISION
 	int resultadoFA;
 	int resultadoFB;
 
-	operandoA=0;
-	operandoB=0;
-
-	do
+	while(1==1) //BUCLE INFINITO
 	{
-		puts("1- Ingresar 1er operando (A=x): ");
-		puts("2- Ingresar 2do operando (B=x): ");
-		puts("3- Calcular todas las operaciones: ");
-		puts("4- Mostrar resultados:");
-		scanf("%d", &opcion);
 		printf("\n");
+		puts("MENU DE OPCIONES");	//SI PONGO ALGO QUE NO SEA UN NÚMERO SE ROMPE TODO.
+		printf("\n");
+		puts("\t1- Ingresar 1er operando (A=x): ");
+		puts("\t2- Ingresar 2do operando (B=x): ");
+		puts("\t3- Calcular todas las operaciones: "); //NO DEBERÍA CALCULAR NI MOSTRAR LOS RESULTADOS CON LA BASURA QUE HAY EN LAS VARIABLES
+		puts("\t4- Mostrar resultados:");
+		scanf("%d",&opcion);
 
 
-			if(opcion==1)
+		switch (opcion)
+		{
+		case 1:
+			utn_getNumero(&operandoA, "Ingrese un número de 1 a 100: ", "\nNumero fuera de rango\n", -100, 100, 3);
+			printf("Operando A = %d\n",operandoA);
+			printf("\n");
+		break;
+
+		case 2:
+			utn_getNumero(&operandoB, "Ingrese un número de 1 a 100: ", "\nNúmero fuera de rango\n", -100, 100, 3);
+			printf("Operando B = %d\n",operandoB);
+			printf("\n");
+		break;
+
+		case 3:
+			resultadoS = suma(operandoA,operandoB);
+			resultadoR = resta(operandoA,operandoB);
+			resultadoM = multiplicacion(operandoA,operandoB);
+			resultadoD = division(operandoA, operandoB, &resultado);
+			resultadoFA = factorial(operandoA);
+			resultadoFB = factorial(operandoB);
+
+			puts("TODAS LAS OPERACIONES CALCULADAS");
+			printf("\n");
+		break;
+
+		case 4:
+
+			printf("El resultado de la suma es: %d",resultadoS);
+			printf("\n");
+			printf("El resultado de la resta es: %d",resultadoR);
+			printf("\n");
+			printf("El resultado de la multiplicación es: %d",resultadoM);
+			printf("\n");
+			if(resultadoD==0)
 			{
-				utn_getNumero(&operandoA, "Ingrese un número de 1 a 100: ", "\nNumero fuera de rango\n", -100, 100, 3);
-				printf("Operando A = %d\n",operandoA);
+				printf("El resultado de la división es: %.2f",resultado);
 				printf("\n");
 			}
 			else
 			{
-				if(opcion==2)
-				{
-					utn_getNumero(&operandoB, "Ingrese un número de 1 a 100: ", "Número fuera de rango", -100, 100, 3);
-					printf("Operando B = %d\n",operandoB);
-					printf("\n");
-				}
-			}
-
-			if(opcion==3)
-			{
-				resultadoS = suma(operandoA,operandoB);
-				resultadoR = resta(operandoA,operandoB);
-				resultadoM = multiplicacion(operandoA,operandoB);
-				resultadoD = division(operandoA, operandoB, &resultado);
-				resultadoFA = factorial(operandoA);
-				resultadoFB = factorial(operandoB);
-
-				puts("Operaciones calculadas");
+				printf("No se puede dividir por cero");
 				printf("\n");
 			}
+			printf("El factorial de %d es: %d",operandoA,resultadoFA);
+			printf("\n");
+			printf("El factorial de %d es: %d",operandoB,resultadoFB);
+			printf("\n");
 
-			if(opcion==4)
-				{
-					if(operandoA!=0 || operandoB!=0)
-					{
-						printf("El resultado de la suma es: %d",resultadoS);
-						printf("\n");
-						printf("El resultado de la resta es: %d",resultadoR);
-						printf("\n");
-						printf("El resultado de la multiplicación es: %d",resultadoM);
-						printf("\n");
-						if(resultadoD==0)
-						{
-							printf("El resultado de la división es: %.2f",resultado);
-							printf("\n");
-						}
-						else
-						{
-							printf("No se puede dividir por cero");
-							printf("\n");
-						}
-						printf("El factorial de %d es: %d",operandoA,resultadoFA);
-						printf("\n");
-						printf("El factorial de %d es: %d",operandoB,resultadoFB);
-						printf("\n");
-					}
-					else
-					{
-						puts("No hay operandos ingresados.");
-						printf("\n");
-					}
-				}
+		break;
 
+		default:
+			puts("Indique una opción");
+			printf("\n");
+		break;
 
-	}while(opcion!=4);
+		}//FIN SWITCH
 
-	printf("\n");
+	}//FIN WHILE
 
 	return EXIT_SUCCESS;
-}
+}//FIN MAIN
 
 
 
