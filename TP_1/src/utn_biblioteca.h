@@ -8,14 +8,15 @@
 #ifndef UTN_BIBLIOTECA_H_
 #define UTN_BIBLIOTECA_H_
 
+void menu();
 int suma(int a,int b);
-int resta(int a, int b);
-int multiplicacion(int a, int b);
-int division(int a, int b, float* pDir);
+int resta(int a,int b);
+int multiplicacion(int a,int b);
+int division(int a,int b, float* pDir);
 int factorial(int numero);
 
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
-int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos);
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError);
+int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError);
 int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos);
 
 int esNumerica(char cadena[]);

@@ -10,26 +10,26 @@
 
 int suma(int a,int b)
 {
-	int resultado;
-	resultado=a+b;
-	return resultado;
+	int total;
+	total=a+b;
+	return total;
 }
 
-int resta(int a, int b)
+int resta(int a,int b)
 {
 	int total;
 	total = a-b;
 	return total;
 }
 
-int multiplicacion(int a, int b)
+int multiplicacion(int a,int b)
 {
 	int total;
 	total = a*b;
 	return total;
 }
 
-int division(int a, int b, float* pDir)
+int division(int a,int b, float* pDir)
 {
 	float total;
 	int estado;
@@ -52,7 +52,7 @@ int division(int a, int b, float* pDir)
 int factorial(int numero)
 {
 	int i;
-	int aux=numero;
+	float aux=numero;
 
 	for(i=1; i<numero; i++)
 	{
@@ -61,43 +61,55 @@ int factorial(int numero)
 	return aux;
 }
 
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError)
 {
 
 	int bufferInt;
 	int retorno = -1;
 
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo<=maximo && reintentos>=0)
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL)
 	{
 
-		while(reintentos>=0)
-		{
-			puts(mensaje);
+			printf(mensaje);
 			fflush(stdin);
 			if(scanf("%d",&bufferInt)==1)
 			{
-				if(bufferInt>=minimo && bufferInt<=maximo)
-				{
-					retorno = 0;
-					break;
-				}
-				else
-				{
-					puts(mensajeError);
-					reintentos--;
-				}
+				retorno = 0;
 			}
 			else
 			{
 				puts(mensajeError);
 			}
-		}
 
 		*pResultado = bufferInt;
 	}
 
 	return retorno;
 
+}
+
+int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError)
+{
+	float bufferInt;
+	int retorno = -1;
+
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL)
+	{
+			printf(mensaje);
+			fflush(stdin);
+			if(scanf("%f",&bufferInt)==1)
+			{
+				retorno = 0;
+			}
+			else
+			{
+				puts(mensajeError);
+			}
+
+		*pResultado = bufferInt;
+	}
+
+	return retorno;
 }
 
 int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos)
@@ -204,4 +216,19 @@ int esAlfanumerica(char cadena[])
 		return retorno;
 	}
 
+}
+
+
+void menu(int a, int b)
+{
+	printf("\n");
+	puts("MENU DE OPCIONES");
+	printf("\n");
+	printf("1- Ingresar 1er operando (A=x): %d",a);
+	printf("\n");
+	printf("2- Ingresar 2do operando (B=x): %d",b);
+	printf("\n");
+	puts("3- Calcular todas las operaciones. "); //NO DEBERÍA CALCULAR NI MOSTRAR LOS RESULTADOS CON LA BASURA QUE HAY EN LAS VARIABLES
+	puts("4- Mostrar resultados.");
+	puts("5- Salir.");
 }
