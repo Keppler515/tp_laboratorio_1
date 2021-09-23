@@ -38,15 +38,16 @@ que contenga las funciones para realizar las cinco operaciones.
 #include "utn_biblioteca.h"
 
 
+
 int main(void)
 {
 
 	setbuf(stdout,NULL);
 
 
-	int operandoA = 0; //¿CÓMO HACER QUE NO SE PUEDAN REALIZAR LOS CALCULOS CON LA BASURA QUE ESTÁ EN LAS VARIABLES SIN TENER QUE INICIALIZAR EN CERO?
+	int operandoA = 0;
 	int operandoB = 0;
-	int opcion;
+	int opcion=0;
 	int resultadoS;
 	int resultadoR;
 	int resultadoM;
@@ -54,75 +55,83 @@ int main(void)
 	float resultado; //GUARDA EL RESULTADO DE LA DIVISION
 	int resultadoFA;
 	int resultadoFB;
+	int flag1=0;
+	int flag2=0;
+	int flag3=0;
+
 
 	while(opcion!=5)
 	{
-		menu(operandoA,operandoB);
+
+		menu(operandoA,operandoB);//IMPRIME LAS OPCIONES EN PANTALLA
 		if(scanf("%d",&opcion)==1)
 		{
-
 			switch (opcion)
 			{
 			case 1:
 				utn_getNumero(&operandoA, "Ingrese un número: ", "\nError\n");
 				printf("Operando A = %d\n",operandoA);
 				printf("\n");
+				flag1=1;
 			break;
 
 			case 2:
 				utn_getNumero(&operandoB, "Ingrese un número: ", "\nError\n");
 				printf("Operando B = %d\n",operandoB);
 				printf("\n");
+				flag2=1;
 			break;
 
 			case 3:
-				resultadoS = suma(operandoA,operandoB);
-				resultadoR = resta(operandoA,operandoB);
-				resultadoM = multiplicacion(operandoA,operandoB);
-				resultadoD = division(operandoA, operandoB, &resultado);
-				resultadoFA = factorial(operandoA);
-				resultadoFB = factorial(operandoB);
-
-				puts("TODAS LAS OPERACIONES CALCULADAS");
-
-			break;
-
-			case 4:
-
-				printf("RESULTADOS: \n");
-				printf("El resultado de la suma es: %d",resultadoS);
-				printf("\n");
-				printf("El resultado de la resta es: %d",resultadoR);
-				printf("\n");
-				printf("El resultado de la multiplicación es: %d",resultadoM);
-				printf("\n");
-				if(resultadoD==0)
+				if(flag1==1 && flag2==1)
 				{
-					printf("El resultado de la división es: %.2f",resultado);
-					printf("\n");
+
+					resultadoS = suma(operandoA,operandoB);
+					resultadoR = resta(operandoA,operandoB);
+					resultadoM = multiplicacion(operandoA,operandoB);
+					resultadoD = division(operandoA, operandoB, &resultado);
+					resultadoFA = factorial(operandoA);
+					resultadoFB = factorial(operandoB);
+
+					flag3=1;
+
+					puts("TODAS LAS OPERACIONES CALCULADAS");
 				}
 				else
 				{
-					printf("No se puede dividir por cero");
-					printf("\n");
+					puts("Falta ingresar algun operando");
 				}
-				printf("El factorial de %d es: %d",operandoA,resultadoFA);
-				printf("\n");
-				printf("El factorial de %d es: %d",operandoB,resultadoFB);
-				printf("\n");
-
 			break;
 
-			default:
+			case 4:
+				if(flag3==1)
+				{
+
+					imprimir(resultadoS,resultadoR,resultadoM,resultadoD,resultado,resultadoFA,resultadoFB,operandoA,operandoB);
+
+					flag1 = 0;
+					flag2 = 0;
+					flag3 = 0;
+
+					operandoA=0;
+					operandoB=0;
+				}
+				else
+				{
+					puts("Falta calcular las operaciones");
+				}
+			break;
+
+			case 5:
 				puts("Finalizado.");
 				printf("\n");
 			break;
 
 			}//FIN SWITCH
 		}
-		else
+		else //SI NO SE INGRESAN NÚMEROS EN LAS
 		{
-			puts("Eso no es un número");
+			puts("Error. Solo se permiten números."); //NO SÉ CÓMO REINICIARLO DESDE ACÁ
 			break;
 		}//FIN IF
 
@@ -130,8 +139,6 @@ int main(void)
 
 	return EXIT_SUCCESS;
 }//FIN MAIN
-
-
 
 
 

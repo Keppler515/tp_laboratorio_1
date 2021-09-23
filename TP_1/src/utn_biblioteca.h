@@ -15,6 +15,8 @@ int multiplicacion(int a,int b);
 int division(int a,int b, float* pDir);
 int factorial(int numero);
 
+void imprimir(int s, int r, int m, int estadoD, float d, int fA, int fB, int num1, int num2);
+
 int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError);
 int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError);
 int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos);

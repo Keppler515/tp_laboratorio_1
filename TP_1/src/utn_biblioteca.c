@@ -224,11 +224,38 @@ void menu(int a, int b)
 	printf("\n");
 	puts("MENU DE OPCIONES");
 	printf("\n");
-	printf("1- Ingresar 1er operando (A=x): %d",a);
+	printf("1- Ingresar 1er operando (A=%d)",a);
 	printf("\n");
-	printf("2- Ingresar 2do operando (B=x): %d",b);
+	printf("2- Ingresar 2do operando (B=%d)",b);
 	printf("\n");
-	puts("3- Calcular todas las operaciones. "); //NO DEBERÍA CALCULAR NI MOSTRAR LOS RESULTADOS CON LA BASURA QUE HAY EN LAS VARIABLES
+	puts("3- Calcular todas las operaciones. ");
 	puts("4- Mostrar resultados.");
 	puts("5- Salir.");
 }
+
+
+void imprimir(int s, int r, int m, int estadoD, float d, int fA, int fB, int num1, int num2)
+{
+	printf("RESULTADOS: \n");
+	printf("El resultado de la suma es: %d",s);
+	printf("\n");
+	printf("El resultado de la resta es: %d",r);
+	printf("\n");
+	printf("El resultado de la multiplicación es: %d",m);
+	printf("\n");
+	if(estadoD==0)
+	{
+		printf("El resultado de la división es: %.2f",d);
+		printf("\n");
+	}
+	else
+	{
+		printf("No se puede dividir por cero");
+		printf("\n");
+	}
+	printf("El factorial de %d es: %d",num1,fA);
+	printf("\n");
+	printf("El factorial de %d es: %d",num2,fB);
+	printf("\n");
+}
+
