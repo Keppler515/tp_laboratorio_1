@@ -8,21 +8,17 @@
 #ifndef UTN_BIBLIOTECA_H_
 #define UTN_BIBLIOTECA_H_
 
-void menu();
-int suma(int a,int b);
-int resta(int a,int b);
-int multiplicacion(int a,int b);
-int division(int a,int b, float* pDir);
-int factorial(int numero);
+void menu(float a, float b); //MUESTRA EL MENU POR PANTALLA Y A MEDIDA QUE RECIBE LOS VALORES LOS COLOCA EN SUS LUGARES
 
-void imprimir(int s, int r, int m, int estadoD, float d, int fA, int fB, int num1, int num2);
+float suma(float a,float b); //RECIBE DOS NUMEROS FLOAT Y RETORNA EL RESULTADO COMO FLOAT
+float resta(float a,float b); //RECIBE DOS NUMEROS FLOAT Y RETORNA EL RESULTADO COMO FLOAT
+float multiplicacion(float a,float b); //RECIBE DOS NUMEROS FLOAT Y RETORNA EL RESULTADO COMO FLOAT
+int division(float a,float b, float* pDir); //RECIBE DOS NUMEROS FLOAT Y RETORNA EL ESTADO DE LA DIVISION. -1 SI NO SE PUDO CALCULAR O 0 SI SE PUDO. EN TAL CASO DEVUELVE POR REFERENCIA EL RESULTADO
+int factorial(float a, int* pResultado);//RECIBE DOS NUMEROS FLOAT Y, EN CASO DE SER >0 Y TENER DECIMALES ==0 LO CASTEA A INT Y RETORNA EL RESULTADO COMO ENTERO
 
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError);
-int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError);
-int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos);
+void imprimir(float s, float r, float m, int estadoD, float d, int estadoFA, int estadoFB, int fA, int fB, float num1, float num2); //IMPRIME EN DIFERENTES RENGLONES LOS RESULTADOS DE LOS CALCULOS
 
-int esNumerica(char cadena[]);
-int esTexto(char cadena[]);
-int esAlfanumerica(char cadena[]);
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError); //SOLICITA UN NUMERO ENTERO Y LO ALOJA EN LA VARIABLE INDICADA EN EL PUNTERO
+int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError); //SOLICITA UN NUMERO FLOTANTE Y LO ALOJA EN LA VARIABLE INDICADA EN EL PUNTERO
 
 #endif /* UTN_BIBLIOTECA_H_ */

@@ -45,14 +45,24 @@ int main(void)
 	setbuf(stdout,NULL);
 
 
-	int operandoA = 0;
-	int operandoB = 0;
+	/*
+	 * NOTAS:
+	 *
+	 * 		Si en el menu de opciones agrego algo que no sea un número se rompe todo.
+	 * 		No sé cómo aramar el bucle para que vuelva en caso de poner otro caracter.
+	 *
+	 */
+
+	float operandoA = 0;
+	float operandoB = 0;
 	int opcion=0;
-	int resultadoS;
-	int resultadoR;
-	int resultadoM;
-	float resultadoD; //GUARDA EL ESTADO DE LA DIVISION
-	float resultado; //GUARDA EL RESULTADO DE LA DIVISION
+	float resultadoS;
+	float resultadoR;
+	float resultadoM;
+	int estadoD;
+	float resultado;
+	int estadoFA;
+	int estadoFB;
 	int resultadoFA;
 	int resultadoFB;
 	int flag1=0;
@@ -62,22 +72,21 @@ int main(void)
 
 	while(opcion!=5)
 	{
-
 		menu(operandoA,operandoB);//IMPRIME LAS OPCIONES EN PANTALLA
-		if(scanf("%d",&opcion)==1)
+		if(scanf("%d",&opcion)==1)//REVISO QUE LA OPCION INGRESADA SEA UN NUMERO
 		{
 			switch (opcion)
 			{
 			case 1:
-				utn_getNumero(&operandoA, "Ingrese un número: ", "\nError\n");
-				printf("Operando A = %d\n",operandoA);
+				utn_getNumeroFlotante(&operandoA, "\nIngrese un número: ", "\nError\n");
+				printf("\nOperando A = %.2f\n",operandoA);
 				printf("\n");
 				flag1=1;
 			break;
 
 			case 2:
-				utn_getNumero(&operandoB, "Ingrese un número: ", "\nError\n");
-				printf("Operando B = %d\n",operandoB);
+				utn_getNumeroFlotante(&operandoB, "\nIngrese un número: ", "\nError\n");
+				printf("\nOperando B = %.2f\n",operandoB);
 				printf("\n");
 				flag2=1;
 			break;
@@ -89,17 +98,17 @@ int main(void)
 					resultadoS = suma(operandoA,operandoB);
 					resultadoR = resta(operandoA,operandoB);
 					resultadoM = multiplicacion(operandoA,operandoB);
-					resultadoD = division(operandoA, operandoB, &resultado);
-					resultadoFA = factorial(operandoA);
-					resultadoFB = factorial(operandoB);
+					estadoD = division(operandoA, operandoB, &resultado);
+					estadoFA = factorial(operandoA,&resultadoFA);
+					estadoFB = factorial(operandoB,&resultadoFB);
 
 					flag3=1;
 
-					puts("TODAS LAS OPERACIONES CALCULADAS");
+					puts("\nTODAS LAS OPERACIONES CALCULADAS");
 				}
 				else
 				{
-					puts("Falta ingresar algun operando");
+					puts("\nFalta ingresar algun operando");
 				}
 			break;
 
@@ -107,7 +116,7 @@ int main(void)
 				if(flag3==1)
 				{
 
-					imprimir(resultadoS,resultadoR,resultadoM,resultadoD,resultado,resultadoFA,resultadoFB,operandoA,operandoB);
+					imprimir(resultadoS,resultadoR,resultadoM,estadoD,resultado,estadoFA,estadoFB,resultadoFA,resultadoFB,operandoA,operandoB);
 
 					flag1 = 0;
 					flag2 = 0;
@@ -129,10 +138,11 @@ int main(void)
 
 			}//FIN SWITCH
 		}
-		else //SI NO SE INGRESAN NÚMEROS EN LAS
+		else //SI LO QUE SE INGRESA NO ES UN NUMERO
 		{
-			puts("Error. Solo se permiten números."); //NO SÉ CÓMO REINICIARLO DESDE ACÁ
-			break;
+			puts("Error. Solo se permiten números.");
+			puts("Saliendo.");
+			break; //NO SÉ CÓMO REINICIARLO DESDE ACÁ. PARA NO VER LA MATRIX CORTO EL BUCLE
 		}//FIN IF
 
 	}//FIN WHILE

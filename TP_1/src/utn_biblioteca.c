@@ -8,28 +8,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int suma(int a,int b)
+float suma(float a,float b)
 {
-	int total;
+	float total;
 	total=a+b;
 	return total;
 }
 
-int resta(int a,int b)
+
+float resta(float a,float b)
 {
-	int total;
+	float total;
 	total = a-b;
 	return total;
 }
 
-int multiplicacion(int a,int b)
+
+float multiplicacion(float a,float b)
 {
-	int total;
+	float total;
 	total = a*b;
 	return total;
 }
 
-int division(int a,int b, float* pDir)
+
+int division(float a,float b, float* pDir)
 {
 	float total;
 	int estado;
@@ -37,7 +40,7 @@ int division(int a,int b, float* pDir)
 	if(b!=0)
 	{
 		estado = 0;
-		total =(float) a/b;
+		total =a/b;
 	}
 	else
 	{
@@ -49,17 +52,32 @@ int division(int a,int b, float* pDir)
 	return estado;
 }
 
-int factorial(int numero)
-{
-	int i;
-	float aux=numero;
 
-	for(i=1; i<numero; i++)
+int factorial(float a, int* pResultado)
+{
+	int retorno;
+
+	if(a<=0 || a>(int)a)
 	{
-		aux=aux*i;
+		retorno = -1;
 	}
-	return aux;
+	else
+	{
+		int i;
+		int aux = (int)a;
+
+		for(i=1; i<a; i++)
+		{
+			aux=aux*i;
+		}
+
+		*pResultado = aux;
+		retorno = 0;
+	}
+
+	return retorno;
 }
+
 
 int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError)
 {
@@ -88,145 +106,40 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError)
 
 }
 
+
 int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError)
 {
 	float bufferInt;
 	int retorno = -1;
 
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL)
+	while(pResultado != NULL && mensaje != NULL && mensajeError != NULL)
 	{
 			printf(mensaje);
 			fflush(stdin);
 			if(scanf("%f",&bufferInt)==1)
 			{
 				retorno = 0;
+				break;
 			}
 			else
 			{
 				puts(mensajeError);
 			}
-
-		*pResultado = bufferInt;
 	}
-
-	return retorno;
-}
-
-int utn_getCaracter(char* pResultado, char* mensaje, char* mensajeError, char minimo, char maximo, int reintentos)
-{
-
-	char bufferChar;
-	int retorno = -1;
-
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo<=maximo && reintentos>=0)
-	{
-		do
-		{
-			printf("%s",mensaje);
-			fflush(stdin);
-			scanf("%c",&bufferChar);
-
-			if(bufferChar>=minimo && bufferChar<=maximo)
-			{
-				*pResultado = bufferChar;
-				retorno = 0;
-				break;
-
-			}
-			else
-			{
-				printf("%s",mensajeError);
-				reintentos--;
-			}
-		} while(reintentos>=0);
-	}
-
-	return retorno;
-
-}
-
-int esNumerica(char cadena[])
-{
-	int retorno = -1;
-	int i = 0;
-	if(cadena!=NULL)
-	{
-		while(cadena[i]!='\0')
-			{
-				if(cadena[i]<'0' || cadena[i]>'9')
-				{
-					puts("Error");
-				}
-				else
-				{
-					retorno=0;
-				}
-
-				i++;
-			}
-	}
+	*pResultado = bufferInt;
 
 	return retorno;
 }
 
 
-int esTexto(char cadena[])
-{
-	int retorno = -1;
-	int i = 0;
-	if(cadena!=NULL)
-	{
-		while(cadena[i]!='\0')
-			{
-				if((cadena[i]>= 'A' && cadena[i]<= 'Z') || (cadena[i]>= 'a'  && cadena[i]<= 'z' ))
-				{
-					retorno=0;
-				}
-				else
-				{
-					retorno=2;
-				}
-
-				i++;
-			}
-	}
-
-	return retorno;
-}
-
-
-int esAlfanumerica(char cadena[])
-{
-	{
-		int retorno = -1;
-		int i = 0;
-		if(cadena!=NULL)
-		{
-			while(cadena[i]!='\0')
-				{
-					if(esTexto(cadena)==0 && esNumerica(cadena)==0)
-					{
-						retorno=0;
-					}
-
-					i++;
-				}
-		}
-
-		return retorno;
-	}
-
-}
-
-
-void menu(int a, int b)
+void menu(float a, float b)
 {
 	printf("\n");
 	puts("MENU DE OPCIONES");
 	printf("\n");
-	printf("1- Ingresar 1er operando (A=%d)",a);
+	printf("1- Ingresar 1er operando (A=%.2f)",a);
 	printf("\n");
-	printf("2- Ingresar 2do operando (B=%d)",b);
+	printf("2- Ingresar 2do operando (B=%.2f)",b);
 	printf("\n");
 	puts("3- Calcular todas las operaciones. ");
 	puts("4- Mostrar resultados.");
@@ -234,14 +147,14 @@ void menu(int a, int b)
 }
 
 
-void imprimir(int s, int r, int m, int estadoD, float d, int fA, int fB, int num1, int num2)
+void imprimir(float s, float r, float m, int estadoD, float d, int estadoFA, int estadoFB, int fA, int fB, float num1, float num2)
 {
-	printf("RESULTADOS: \n");
-	printf("El resultado de la suma es: %d",s);
+	printf("\nRESULTADOS: \n\n");
+	printf("El resultado de la suma es: %.2f",s);
 	printf("\n");
-	printf("El resultado de la resta es: %d",r);
+	printf("El resultado de la resta es: %.2f",r);
 	printf("\n");
-	printf("El resultado de la multiplicación es: %d",m);
+	printf("El resultado de la multiplicación es: %.2f",m);
 	printf("\n");
 	if(estadoD==0)
 	{
@@ -253,9 +166,26 @@ void imprimir(int s, int r, int m, int estadoD, float d, int fA, int fB, int num
 		printf("No se puede dividir por cero");
 		printf("\n");
 	}
-	printf("El factorial de %d es: %d",num1,fA);
-	printf("\n");
-	printf("El factorial de %d es: %d",num2,fB);
-	printf("\n");
+
+	if(estadoFA==0)
+	{
+		printf("El factorial de %.2f es: %d",num1,fA);
+		printf("\n");
+	}
+	else
+	{
+		printf("El número %.2f no se puede factorizar",num1);
+		printf("\n");
+	}
+	if(estadoFB==0)
+	{
+		printf("El factorial de %.2f es: %d",num2,fB);
+		printf("\n");
+	}
+	else
+	{
+		printf("El número %.2f no se puede factorizar",num2);
+		printf("\n");
+	}
 }
 
