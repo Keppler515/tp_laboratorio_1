@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
-#include "FuncionesVarias.h"
 #include "parser.h"
 #include "utn_biblioteca.h"
 
@@ -22,7 +22,6 @@
 *****************************************************/
 
 
-
 int main()
 {
 	setbuf(stdout,NULL);
@@ -36,7 +35,7 @@ int main()
     LinkedList* listaEmpleados = ll_newLinkedList();
     do{
 
-    	employee_menu(&option);
+    	controller_menu(&option);
     	printf("\n");
 
         switch(option)
@@ -44,11 +43,16 @@ int main()
             case 1:
 				if(flagBin==0)
                 {
+					if(flagText==1)
+					{
+						puts("El archivo ya se encuentra cargado\n");
+						break;
+					}
 					if(controller_loadFromText("data.csv",listaEmpleados)==0)
-                	{
+					{
 						flagText = 1;
 						puts("Archivo cargado en modo texto\n");
-                	}
+					}
                 }
 				else
 					puts("Ya se encuentra cargado el archivo en modo binario\n");
@@ -56,6 +60,11 @@ int main()
             case 2:
 				if(flagText==0)
             	{
+					if(flagBin==1)
+										{
+						puts("El archivo ya se encuentra cargado\n");
+						break;
+					}
 					if(controller_loadFromBinary("data.csv",listaEmpleados)==0)
             		{
 						flagBin = 1;
@@ -113,7 +122,7 @@ int main()
 			case 8:
 				if(flagText||flagBin||flagManual)
 				{
-					if(controller_saveAsText("dataText.txt",listaEmpleados)==0)
+					if(controller_saveAsText("dataText.csv",listaEmpleados)==0)
 					{
 						puts("Datos guardados correctamente en modo texto\n");
 					}
@@ -124,7 +133,7 @@ int main()
 			case 9:
 				if(flagText||flagBin||flagManual)
 				{
-					if(controller_saveAsBinary("dataBin.bin",listaEmpleados)==0)
+					if(controller_saveAsBinary("dataBin.csv",listaEmpleados)==0)
 					{
 						puts("Datos guardados correctamente en modo binario\n");
 					}

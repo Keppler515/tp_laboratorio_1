@@ -88,7 +88,8 @@ int employee_setId(Employee* this,int id)
 
 int employee_getNombre(Employee* this,char* nombre)
 {
-	strncpy(nombre,this->nombre,sizeof(128));
+	//strncpy(nombre,this->nombre,sizeof(128));
+	strcpy(nombre,this->nombre);
 
 	return 0;
 }
@@ -157,4 +158,11 @@ int employee_comparaEmpleadosID(void* empleado1, void* empleado2)
 
 
 	return retorno;
+}
+
+int employee_generadorID(void)
+{
+	static int contador = 0;
+	contador++;
+	return contador;
 }
