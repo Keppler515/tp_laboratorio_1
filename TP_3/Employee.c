@@ -6,12 +6,23 @@
 #include "LinkedList.h"
 #include "Employee.h"
 
+/** \brief Crea una nueva estructura empleado
+ *
+ * \return Employee*
+ *
+ */
+
 Employee* employee_new()
 {
 	return (Employee*) malloc(sizeof(Employee));
 }
 
-
+/** \brief Crea una nueva estructura empleado con datos cargados
+ *
+ * \param char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr
+ * \return Employee* con datos ingresados
+ *
+ */
 
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr)
 {
@@ -37,6 +48,12 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 	return thisAux;
 }
 
+/** \brief Elimina Employee
+ *
+ * \param puntero a Employee
+ * \return void
+ *
+ */
 
 void employee_delete(Employee* this)
 {
@@ -46,6 +63,13 @@ void employee_delete(Employee* this)
 	}
 }
 
+/** \brief setea nombre en Employee
+ *
+ * \param puntero a Employee
+ * \param char nombre
+ * \return 0
+ *
+ */
 
 int employee_setNombre(Employee* this,char* nombre)
 {
@@ -54,7 +78,13 @@ int employee_setNombre(Employee* this,char* nombre)
 	return 0;
 }
 
-
+/** \brief setea horas en Employee
+ *
+ * \param puntero a Employee
+ * \param int horas
+ * \return 0
+ *
+ */
 
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
@@ -63,7 +93,13 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 	return 0;
 }
 
-
+/** \brief setea sueldo en Employee
+ *
+ * \param puntero a Employee
+ * \param int sueldo
+ * \return 0
+ *
+ */
 
 int employee_setSueldo(Employee* this,int sueldo)
 {
@@ -72,7 +108,13 @@ int employee_setSueldo(Employee* this,int sueldo)
 	return 0;
 }
 
-
+/** \brief setea id en Employee
+ *
+ * \param puntero a Employee
+ * \param int id
+ * \return 0
+ *
+ */
 
 int employee_setId(Employee* this,int id)
 {
@@ -84,7 +126,13 @@ int employee_setId(Employee* this,int id)
 
 /*************************************************************/
 
-
+/** \brief devuelve nombre en Employee
+ *
+ * \param puntero a Employee
+ * \param char* nombre
+ * \return 0
+ *
+ */
 
 int employee_getNombre(Employee* this,char* nombre)
 {
@@ -94,7 +142,13 @@ int employee_getNombre(Employee* this,char* nombre)
 	return 0;
 }
 
-
+/** \brief devuelve horas en Employee
+ *
+ * \param puntero a Employee
+ * \param int* horasTrabajadas
+ * \return 0
+ *
+ */
 
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
@@ -103,7 +157,13 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 	return 0;
 }
 
-
+/** \brief devuelve sueldo en Employee
+ *
+ * \param puntero a Employee
+ * \param int* sueldo
+ * \return 0
+ *
+ */
 
 int employee_getSueldo(Employee* this,int* sueldo)
 {
@@ -112,7 +172,13 @@ int employee_getSueldo(Employee* this,int* sueldo)
 	return 0;
 }
 
-
+/** \brief devuelve ID en Employee
+ *
+ * \param puntero a Employee
+ * \param int* id
+ * \return 0
+ *
+ */
 
 int employee_getId(Employee* this,int* id)
 {
@@ -120,6 +186,14 @@ int employee_getId(Employee* this,int* id)
 
 	return 0;
 }
+
+/** \brief compara valores de dos cadenas de texto
+ *
+ * \param void* item1
+ * \param void* item2
+ * \return == 0; < -1; > 1;
+ *
+ */
 
 int employee_comparaEmpleados(void* empleado1, void* empleado2)
 {
@@ -138,6 +212,14 @@ int employee_comparaEmpleados(void* empleado1, void* empleado2)
 
 	return retorno;
 }
+
+/** \brief compara valores ID
+ *
+ * \param void* item1
+ * \param void* item2
+ * \return < -1; > 1;
+ *
+ */
 
 int employee_comparaEmpleadosID(void* empleado1, void* empleado2)
 {
@@ -159,6 +241,12 @@ int employee_comparaEmpleadosID(void* empleado1, void* empleado2)
 
 	return retorno;
 }
+
+/** \brief Genera un ID sin repetir
+ *
+ * \return contador(valor ID);
+ *
+ */
 
 int employee_generadorID(void)
 {

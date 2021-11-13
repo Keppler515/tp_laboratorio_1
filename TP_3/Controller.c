@@ -440,6 +440,12 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 	return retorno;
 }
 
+/** \brief Muestra el menu de opciones del inicio
+ *
+ * \param int* opcion
+ * \return void
+ *
+ */
 
 void controller_menu(int* opcion)
 {
