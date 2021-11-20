@@ -192,7 +192,7 @@ void* ll_get(LinkedList* this, int nodeIndex)
     	nAux = getNode(this, nodeIndex); //Guardo el nodo recibido en una variable
     	if(nAux!=NULL)
     	{
-    		returnAux = nAux->pElement;
+    		returnAux = nAux->pElement; //Guardo el elemento y lo devuelvo
     	}
     }
     return returnAux;
@@ -215,10 +215,10 @@ int ll_set(LinkedList* this, int nodeIndex,void* pElement)
 
     if(this!=NULL && nodeIndex >=0 && nodeIndex<=this->size)
     {
-    	nAux = getNode(this, nodeIndex);
+    	nAux = getNode(this, nodeIndex); //Guardo el nodo que apunta al elemento que quiero modificar
     	if(nAux!=NULL)
     	{
-    		nAux->pElement = pElement;
+    		nAux->pElement = pElement; //El nodo apunta al nuevo elemento
     		returnAux = 0;
     	}
     }
@@ -244,7 +244,7 @@ int ll_remove(LinkedList* this,int nodeIndex)
 	if(this!=NULL && nodeIndex>=0 && nodeIndex<=this->size)
 	{
 
-		nAux = (Node*)getNode(this, nodeIndex); //Obtengo el nodo
+		nAux = getNode(this, nodeIndex); //Obtengo el nodo
 		if(nAux!=NULL)
 		{
 			//Primera posicion
@@ -297,7 +297,7 @@ int ll_clear(LinkedList* this)
     {
     	for(i=0;i<this->size;i++)
     	{
-    		ll_remove(this, i);
+    		ll_remove(this, i); //Recorro la lista y elimino cada nodo
     	}
     	returnAux = 0;
     }
@@ -319,8 +319,8 @@ int ll_deleteLinkedList(LinkedList* this)
     int returnAux = -1;
     if(this!=NULL)
     {
-		ll_clear(this);
-		free(this);
+		ll_clear(this); //Llamo a la funcion para eliminar cada nodo
+		free(this); //Libero el espacio creado con malloc
 		returnAux = 0;
     }
 
@@ -398,7 +398,7 @@ int ll_push(LinkedList* this, int nodeIndex, void* pElement)
 
     if(this!=NULL && nodeIndex>=0 && nodeIndex<=this->size)
     {
-    	addNode(this, nodeIndex, pElement);
+    	addNode(this, nodeIndex, pElement); //Agreo un nodo en la posicion nodeIndex
     	returnAux = 0;
     }
 
@@ -518,14 +518,14 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 
     if(this!=NULL && from >=0 && from<=ll_len(this) && to>from  && to<=ll_len(this))
     {
-    	cloneArray = ll_newLinkedList();
+    	cloneArray = ll_newLinkedList(); //Creo una nueva LL
     	if(cloneArray!=NULL)
     	{
-			for(i=from;i<to;i++)
+			for(i=from;i<to;i++) //Desde from hasta to
 			{
-				clon = ll_get(this, i);
+				clon = ll_get(this, i); //Obtengo los elementos
 				if(clon!=NULL)
-				ll_add(cloneArray, clon);
+				ll_add(cloneArray, clon); //Los copio en la LL nueva
 			}
     	}
     }
@@ -547,8 +547,8 @@ LinkedList* ll_clone(LinkedList* this)
 
     if(this!=NULL)
     {
-		cloneArray = ll_newLinkedList();
-		cloneArray = this;
+		cloneArray = ll_newLinkedList(); //Creo una nueva LL
+		cloneArray = this; //La igualo a la original
     }
     return cloneArray;
 }
@@ -579,9 +579,10 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 
     		for(i=0;i<ll_len(this)-1;i++)
     		{
+    			//Guardo los elementos 1 y 2
     			aux1 = ll_get(this, i);
     			aux2 = ll_get(this, i+1);
-    			criterio = pFunc(aux1,aux2);
+    			criterio = pFunc(aux1,aux2); //Guardo el valor de retorno de la funcion criterio
 
     			if(order == 1)
     			{
@@ -604,7 +605,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 						aux1 = buffer;
     				}
     			}
-
+    		//Escribo los valores ordenados
 			ll_set(this, i, aux1);
 			ll_set(this, i+1, aux2);
     		}
